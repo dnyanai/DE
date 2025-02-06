@@ -87,8 +87,8 @@ select *
 from players
 where current_season = 2001;
 
--- Drop table players;
-CREATE TYPE scoring_class as ENUM ('star', 'good', 'average', 'bad');
+Drop table players;
+-- CREATE TYPE scoring_class as ENUM ('star', 'good', 'average', 'bad');
 CREATE TABLE players
 (
     player_name             TEXT,
@@ -101,9 +101,21 @@ CREATE TABLE players
     season_stats            season_stats[],
     scoring_class           scoring_class,
     years_since_last_season INTEGER,
+--     is_active               BOOLEAN,
     current_season          INTEGER,
     PRIMARY KEY (player_name, current_season)
 );
+
+select player_name,
+       (season_stats[cardinality(season_stats)]::season_stats).pts
+           /
+       case
+           when (season_stats[1]::season_stats).pts = 0 then 1
+           else
+               (season_stats[1]::season_stats).pts end
+from players
+where current_season = 2001;
+
 
 INSERT INTO players
 with yesterday as (SELECT *
@@ -152,14 +164,3 @@ select coalesce(t.player_name, y.player_name)     as player_name,
 from today t
          full outer join yesterday y
                          on t.player_name = y.player_name;
-
-
-select player_name,
-       (season_stats[cardinality(season_stats)]::season_stats).pts
-           /
-       case
-           when (season_stats[1]::season_stats).pts = 0 then 1
-           else
-               (season_stats[1]::season_stats).pts end
-from players
-where current_season = 2001

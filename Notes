@@ -43,3 +43,15 @@ V.	-- Alter schema owner to postgres;
 	-- exit from postgres and then run the following command to make the databas structure:
 	in Zach wilson folder:		 pg_restore -U postgres -d postgres data.dump
 	
+
+VI. For Jupyter I have condo on terminal with the user jupyter_env
+() my-air@Dnyanais-Air ~ % conda create -n jupyter_env   
+() my-air@Dnyanais-Air ~ % conda activate jupyter_env   
+(jupyter_env) my-air@Dnyanais-Air ~ % conda install jupyter
+
+https://saturncloud.io/blog/how-to-use-jupyter-notebooks-in-a-conda-environment-a-comprehensive-guide-for-data-scientists/       
+
+Conda list --> list all packages 
+Conda info --envs --> list info of all envs
+
+VII. Conda env export > environment.yaml for creating dependencies file 
