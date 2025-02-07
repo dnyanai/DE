@@ -1,0 +1,19 @@
+#I. To remove a file from getting commit to remote due to size issues do:
+    1. First clear the cache with
+            git rm --cached <FILE NAME>
+            eg: git rm --cached Projects/GovData_DrugsDeaths/Accidental_Drug_Related_Deaths_2012-2023.csv
+
+    2. Then create a .gitignore file and do the following:
+        https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring
+        I simply added the folder path to ignore file
+        Projects/GovData_DrugsDeaths/data to .gitignore file
+
+    3. Sometimes things from the past will haunt your git because your git tracked it, so here i get an error of large file still for a file i already moved into a new directory and created a gitignore for.
+       Do this then --
+            git reset -- soft origin/main
+            :: This will keep local changes and clear your commits. So you dont lose your local changes but lose the commits which had fuckall tracking of dead stuff.
+            :: If you seek to rewrite your local branch with everything remote, then do this --
+            git reset -- hard origin/main
+
+    4. Now do git push, if you have made too many changes to the folder structure which is not present in the remote git loc then you need to do a force push --
+            git push origin main --force

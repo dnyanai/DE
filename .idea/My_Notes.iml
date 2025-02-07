@@ -6,10 +6,13 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
     <content url="file://$MODULE_DIR$/../GovData_DrugsDeaths" />
     <content url="file://$MODULE_DIR$/../Kaggle_AirBnB" />
-    <content url="file://$MODULE_DIR$" />
-    <content url="file://$MODULE_DIR$/../ZachWilsonBootcamp" />
+    <content url="file://$MODULE_DIR$/../My_Notes" />
+    <content url="file://$MODULE_DIR$/../ZachWilsonBootcamp">
+      <excludeFolder url="file://$MODULE_DIR$/../ZachWilsonBootcamp/.idea" />
+    </content>
     <content url="file://$MODULE_DIR$/../../Tools" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
