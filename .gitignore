@@ -2,3 +2,6 @@
 Projects/GovData_DrugsDeaths/data
 Projects/Kaggle_AirBnB/data
 My_Notes
+
+# remove intelliJ hidden files:
+.idea
