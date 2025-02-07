@@ -1,3 +1,4 @@
-# ignore all files in any directory named data/
+# ignore all files in any directory as follows:
 Projects/GovData_DrugsDeaths/data
 Projects/Kaggle_AirBnB/data
+My_Notes
