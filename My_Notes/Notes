@@ -1,0 +1,57 @@
+I. Arrogant Stuck processes - 
+
+1. linux cmds: 
+	-- ps -ef | head -n 1 && ps -ef | grep postgres
+
+	1. ps -ef shows all processes in full format.
+	2. head -n 1 displays only the first line (header) of the ps -ef output.
+	3. The && operator allows us to run a second command after the first one.
+	4. The siiecond ps -ef | grep postgres filters for lines containing "postgres".
+
+
+2. Bad idea to uninstall postgres when postgres service is running. it will create a file in /tmp/ which will make you suffer if you forgot the unix cmds. 
+	if you see in 1. something on port 5432 as /tmp/ then do 3
+3. From output from 1. use the following cmd which you know:
+	-- kill -9 <pid> from 1. 
+	-- for me, rm /tmp/--- socket file did not really work. but 3 worked!
+
+
+II. Homebrew for postgres or pgadmin:
+
+1. Use homebrew for downloading postgres and also pgadmin. google the installation. 
+2. brew services start postgresql , restart or stop
+3. initdb 
+
+III. if homebrew installed postgres does not output on the comd: psql postgres that means for some reason this db is not getting created even when you have initialized the db. so check on the template1 db and create postgres in that env.
+
+
+IV. cmds SQL for creating postgres and postgres user and giving permissions to postgres user:
+	-- postgres=# CREATE DATABASE postgres;
+	-- \l to list dbs and users,*
+	-- GRANT ALL PRIVILEGES ON DATABASE postgres TO "my-air";
+
+	-- postgres=# create user postgres with password 'postgres';
+	-- postgres=# grant all privileges on database postgres to postgres;
+	-- \l
+
+	GRANT ALL PRIVILEGES ON DATABASE your_database_name TO your_user;
+	GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO your_user;
+	ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO your_user;
+	GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO your_user;
+
+V.	-- Alter schema owner to postgres; 
+	-- exit from postgres and then run the following command to make the databas structure:
+	in Zach wilson folder:		 pg_restore -U postgres -d postgres data.dump
+	
+
+VI. For Jupyter I have condo on terminal with the user jupyter_env
+() my-air@Dnyanais-Air ~ % conda create -n jupyter_env   
+() my-air@Dnyanais-Air ~ % conda activate jupyter_env   
+(jupyter_env) my-air@Dnyanais-Air ~ % conda install jupyter
+
+https://saturncloud.io/blog/how-to-use-jupyter-notebooks-in-a-conda-environment-a-comprehensive-guide-for-data-scientists/       
+
+Conda list --> list all packages 
+Conda info --envs --> list info of all envs
+
+VII. Conda env export > environment.yaml for creating dependencies file 

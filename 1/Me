@@ -1,4 +1,0 @@
-1. For airbnb project I can clean the data -> make a table dataset with use of complex SQL datatypes: struct and array
-2. So at google, we had historical partition table and current partition data table, so this was using Type 2 SCD. in that there
- were daily partitions and monthly partitions too.
-3. Type 2 and Type 0 SCD = idempotent. Type 2 = between start date and end date. Type 0 = identifier and a non changing dimension such as category_name.
