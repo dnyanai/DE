@@ -3,5 +3,11 @@ Projects/GovData_DrugsDeaths/data
 Projects/Kaggle_AirBnB/data
 My_Notes
 
+#temporarily removing the kafka-spark related docker things:
+Projects/GovData_DrugsDeaths/Docker_test/.env
+Projects/GovData_DrugsDeaths/Docker_test/Example .env_for_Dev_and_Prod_env
+Projects/GovData_DrugsDeaths/Docker_test/set-env.sh
+
 # remove intelliJ hidden files:
 *.idea
+
