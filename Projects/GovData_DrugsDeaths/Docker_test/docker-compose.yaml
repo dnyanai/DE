@@ -1,0 +1,72 @@
+services:
+  zookeeper:
+    container_name: ${ENV}-zookeeper
+    image: ${ZOOKEEPER_IMAGE}
+    environment:
+      ZOOKEEPER_CLIENT_PORT: ${ZOOKEEPER_PORT}
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "${ZOOKEEPER_PORT}:${ZOOKEEPER_PORT}"
+    volumes:
+      - ./logs/${ENV}/zookeeper:/var/log/services/zookeeper
+      - ${ENV}_zookeeper_data:/var/lib/zookeeper/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "environment=${ENV}"
+        tag: "${ENV}-zookeeper"
+
+  kafka:
+    container_name: ${ENV}-kafka
+    image: ${KAFKA_IMAGE}
+    depends_on:
+      - zookeeper
+    ports:
+      - "${KAFKA_PORT}:${KAFKA_PORT}"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: ${ENV}-zookeeper:${ZOOKEEPER_PORT}
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://${ENV}-kafka:29092,PLAINTEXT_HOST://localhost:${KAFKA_PORT}
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    volumes:
+      - ./logs/${ENV}/kafka:/var/log/services/kafka
+      - ${ENV}_kafka_data:/var/lib/kafka/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "environment=${ENV}"
+        tag: "${ENV}-kafka"
+
+  spark:
+    container_name: ${ENV}-spark
+    image: ${SPARK_IMAGE}
+    depends_on:
+      - kafka
+    ports:
+      - "${SPARK_UI_PORT}:${SPARK_UI_PORT}"
+    volumes:
+      - ./data/${ENV}:/data
+      - ./code:/code
+      - ./logs/${ENV}/spark:/var/log/services/spark
+      - ${ENV}_spark_data:/var/lib/spark
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+        labels: "environment=${ENV}"
+        tag: "${ENV}-spark"
+
+volumes:
+  prod_zookeeper_data:
+  prod_kafka_data:
+  prod_spark_data:
+  test_zookeeper_data:
+  test_kafka_data:
+  test_spark_data:
