@@ -11,3 +11,5 @@ Projects/GovData_DrugsDeaths/Docker_test/set-env.sh
 # remove intelliJ hidden files:
 *.idea
 
+/Projects/Fitness_Tracker
+*.log
