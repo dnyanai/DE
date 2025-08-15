@@ -1,7 +1,11 @@
 # ignore all files in any directory as follows:
 Projects/GovData_DrugsDeaths/data
 Projects/Kaggle_AirBnB/data
+/Projects/Fitness_Tracker
+/Projects/Games
+
 My_Notes
+
 
 #temporarily removing the kafka-spark related docker things:
 Projects/GovData_DrugsDeaths/Docker_test/.env
@@ -11,5 +15,5 @@ Projects/GovData_DrugsDeaths/Docker_test/set-env.sh
 # remove intelliJ hidden files:
 *.idea
 
-/Projects/Fitness_Tracker
+# removing tracking on log files of any name
 *.log
